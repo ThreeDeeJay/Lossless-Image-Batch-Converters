@@ -19,7 +19,7 @@ IF NOT "%~1"=="" (
 	)
 
 ECHO.
-ECHO Press any key to convert all the PNG files in this folder and subfolders
+ECHO Press any key to convert all the PNS files in this folder and subfolders
 ECHO Output format: WebP lossless
 IF DEFINED OutputPath (
 	ECHO Output folder: !OutputPath!
@@ -36,7 +36,7 @@ PAUSE >NUL
 ECHO.
 
 FOR /R %%A in (*.*) do (
-	IF /I "%%~xA"==".png" (
+	IF /I "%%~xA"==".pns" (
 		SET "OutputPath=%%~dpA"
 		IF "%~1"=="" (
 			SET "OutputPath=%~dp0WebP\!OutputPath:%~dp0=!"
