@@ -67,6 +67,6 @@ EXIT /B
 
 :Encode
 ECHO Encoding %2
-"%~dp0cwebp.exe" -v -mt -noasm -metadata all -progress -lossless -z 8 -m 6 %1 -o %2
+"%~dp0cwebp.exe" -v -mt -noasm -metadata all -progress -lossless -z 8 -m 6 -q 99 %1 -o %2
 ECHO.
 EXIT /B
