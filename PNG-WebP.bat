@@ -5,6 +5,7 @@ SETlocal EnableDelayedExpansion
 
 TITLE WebP lossless batch converter - By 3DJ
 
+pushd "%~dp0"
 IF NOT "%~1"=="" (
 	IF EXIST "%~1/*" (
 		CD "%~1"
