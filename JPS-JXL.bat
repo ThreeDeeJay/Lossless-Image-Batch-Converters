@@ -3,7 +3,7 @@
 SETlocal EnableExtensions
 SETlocal EnableDelayedExpansion
 
-TITLE WebP lossless batch converter - By 3DJ
+TITLE JXL lossless batch converter - By 3DJ
 
 pushd "%~dp0"
 IF NOT "%~1"=="" (
@@ -12,7 +12,7 @@ IF NOT "%~1"=="" (
 		SET "OutputPath=%~1\"
 		) ELSE (
 		For %%A in ("%~1") do (
-			CALL :Convert %%A "%%~dpA%%~nA.webp"
+			CALL :Convert %%A "%%~dpA%%~nA.jxl"
 			PAUSE
 			EXIT
 			)
@@ -20,32 +20,32 @@ IF NOT "%~1"=="" (
 	)
 
 ECHO.
-ECHO Press any key to convert all the PNG files in this folder and subfolders
-ECHO Output format: WebP lossless
+ECHO Press any key to convert all the JPS files in this folder and subfolders
+ECHO Output format: JXL lossless
 IF DEFINED OutputPath (
 	ECHO Output folder: !OutputPath!
 	) ELSE (
-	ECHO Output folder: WebP\
+	ECHO Output folder: JXL\
 	)
 ECHO Folder structure: Same as input relative path
 ECHO.
-ECHO - To generate WebP files in the same folder as the input files, 
+ECHO - To generate JXL files in the same folder as the input files, 
 ECHO close this window and drag the folder/file into the .bat file.
-ECHO - Existing WebP files will be skipped, 
+ECHO - Existing JXL files will be skipped, 
 ECHO so you can stop and resume batch conversion later if needed.
 PAUSE >NUL
 ECHO.
 
 FOR /R %%A in (*.*) do (
-	IF /I "%%~xA"==".png" (
+	IF /I "%%~xA"==".jps" (
 		SET "OutputPath=%%~dpA"
 		IF "%~1"=="" (
-			SET "OutputPath=%~dp0WebP\!OutputPath:%~dp0=!"
+			SET "OutputPath=%~dp0JXL\!OutputPath:%~dp0=!"
 			IF NOT EXIST "!OutputPath!" (
 				MKDIR "!OutputPath!"
 				)
 			)
-		CALL :Convert "%%A" "!OutputPath!%%~nA.webp"
+		CALL :Convert "%%A" "!OutputPath!%%~nA.jxl"
 		)
 	)
 ECHO Press any key to open the output folder
@@ -68,6 +68,6 @@ EXIT /B
 
 :Encode
 ECHO Encoding %2
-"%~dp0cwebp.exe" -v -mt -noasm -metadata all -progress -lossless -z 8 -m 6 -q 99 %1 -o %2
+"%~dp0cjxl.exe" %1 %2 --verbose --quality=100 --effort=9
 ECHO.
 EXIT /B
