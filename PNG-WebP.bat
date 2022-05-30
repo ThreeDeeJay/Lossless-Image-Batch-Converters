@@ -5,7 +5,7 @@ SETlocal EnableDelayedExpansion
 
 TITLE WebP lossless batch converter - By 3DJ
 
-SET InputFormat=PNS
+SET InputFormat=PNG
 
 pushd "%~dp0"
 IF NOT "%~1"=="" (

@@ -5,10 +5,13 @@ SETlocal EnableDelayedExpansion
 
 TITLE JXL lossless batch converter - By 3DJ
 
+SET InputFormat=JPS
+
 pushd "%~dp0"
 IF NOT "%~1"=="" (
 	IF EXIST "%~1/*" (
 		CD "%~1"
+		pushd  "%~1"
 		SET "OutputPath=%~1\"
 		) ELSE (
 		For %%A in ("%~1") do (
@@ -20,7 +23,7 @@ IF NOT "%~1"=="" (
 	)
 
 ECHO.
-ECHO Press any key to convert all the JPS files in this folder and subfolders
+ECHO Press any key to convert all the !InputFormat! files in this folder and subfolders
 ECHO Output format: JXL lossless
 IF DEFINED OutputPath (
 	ECHO Output folder: !OutputPath!
@@ -37,7 +40,7 @@ PAUSE >NUL
 ECHO.
 
 FOR /R %%A in (*.*) do (
-	IF /I "%%~xA"==".jps" (
+	IF /I "%%~xA"==".!InputFormat!" (
 		SET "OutputPath=%%~dpA"
 		IF "%~1"=="" (
 			SET "OutputPath=%~dp0JXL\!OutputPath:%~dp0=!"
