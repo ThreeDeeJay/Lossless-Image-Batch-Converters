@@ -71,6 +71,6 @@ EXIT /B
 
 :Encode
 ECHO Encoding %2
-"%~dp0cjxl.exe" %1 %2 --verbose --quality=100 --effort=9
+"%~dp0Converters/cjxl.exe" %1 %2 --verbose --quality=100 --effort=9
 ECHO.
 EXIT /B

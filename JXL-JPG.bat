@@ -3,9 +3,9 @@
 SETlocal EnableExtensions
 SETlocal EnableDelayedExpansion
 
-TITLE JXL lossless batch converter - By 3DJ
+TITLE JPG lossless batch converter - By 3DJ
 
-SET InputFormat=JPS
+SET InputFormat=JXL
 
 pushd "%~dp0"
 IF NOT "%~1"=="" (
@@ -15,7 +15,7 @@ IF NOT "%~1"=="" (
 		SET "OutputPath=%~1\"
 		) ELSE (
 		For %%A in ("%~1") do (
-			CALL :Convert %%A "%%~dpA%%~nA.jxl"
+			CALL :Convert %%A "%%~dpA%%~nA.jpg"
 			PAUSE
 			EXIT
 			)
@@ -24,17 +24,17 @@ IF NOT "%~1"=="" (
 
 ECHO.
 ECHO Press any key to convert all the !InputFormat! files in this folder and subfolders
-ECHO Output format: JXL lossless
+ECHO Output format: JPG lossless
 IF DEFINED OutputPath (
 	ECHO Output folder: !OutputPath!
 	) ELSE (
-	ECHO Output folder: JXL\
+	ECHO Output folder: JPG\
 	)
 ECHO Folder structure: Same as input relative path
 ECHO.
-ECHO - To generate JXL files in the same folder as the input files, 
+ECHO - To generate JPG files in the same folder as the input files, 
 ECHO close this window and drag the folder/file into the .bat file.
-ECHO - Existing JXL files will be skipped, 
+ECHO - Existing JPG files will be skipped, 
 ECHO so you can stop and resume batch conversion later if needed.
 PAUSE >NUL
 ECHO.
@@ -43,12 +43,12 @@ FOR /R %%A in (*.*) do (
 	IF /I "%%~xA"==".!InputFormat!" (
 		SET "OutputPath=%%~dpA"
 		IF "%~1"=="" (
-			SET "OutputPath=%~dp0JXL\!OutputPath:%~dp0=!"
+			SET "OutputPath=%~dp0JPG\!OutputPath:%~dp0=!"
 			IF NOT EXIST "!OutputPath!" (
 				MKDIR "!OutputPath!"
 				)
 			)
-		CALL :Convert "%%A" "!OutputPath!%%~nA.jxl"
+		CALL :Convert "%%A" "!OutputPath!%%~nA.jpg"
 		)
 	)
 ECHO Press any key to open the output folder
@@ -71,6 +71,6 @@ EXIT /B
 
 :Encode
 ECHO Encoding %2
-"%~dp0Converters/cjxl.exe" %1 %2 --verbose --quality=100 --effort=9
+"%~dp0Converters/djxl.exe" %1 %2
 ECHO.
 EXIT /B
